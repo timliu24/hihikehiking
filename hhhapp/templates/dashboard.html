@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Hi Hike Hiking</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-image: url('{%static 'img/hike.jpg'%}');">
+    <a href="/logout"><button>Logout</button></a>
+    <h1>Welcome, hiker {{current_user.first_name}}!</h1>
+    <div>
+        <h3>Hikes you are joining:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hike Name</th>
+                    <th>Location</th>
+                    <th>Number of Hikers</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            {% for one_hike in all_hikes %}
+            <tbody>
+                {% if current_user in one_hike.added_by.all %}
+                <tr>
+                    <td><a href="/hikes/{{one_hike.id}}/hikedetails">{{one_hike.title}}</a></td>
+                    <td>{{one_hike.location}}</td>
+                    <td>{{one_hike.added_by.count}}</td>
+                    <td>{{one_hike.date|date:"M d, Y"}}</td>
+                    <td>{{one_hike.time}} {{one_hike.ampm}}</td>
+                </tr>
+                {% endif %}
+            </tbody>
+            {% endfor %}
+        </table>
+        <br>
+    <a href="/hikes/new"><button>Add a hike</button></a>
+
+        <h3>Upcoming hikes:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hike Name</th>
+                        <th>Location</th>
+                        <th>Number of Hikers</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                {% for one_hike in all_hikes %}
+                <tbody>
+                    {% if current_user not in one_hike.added_by.all %}
+                    <tr>
+                        <td><a href="/hikes/{{one_hike.id}}/hikedetails">{{one_hike.title}}</a></td>
+                        <td>{{one_hike.location}}</td>
+                        <td>{{one_hike.added_by.count}}</td>
+                        <td>{{one_hike.date|date:"M d, Y"}}</td>
+                        <td>{{one_hike.time}} {{one_hike.ampm}}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+                {% endfor %}
+            </table>
+
+    </div>
+</body>
+</html>

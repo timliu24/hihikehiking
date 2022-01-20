@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Hike</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-image: url('{%static 'img/hike.jpg'%}');">
+    <a href="/logout"><button>Logout</button></a>
+    <h1>Welcome, hiker {{current_user.first_name}}!</h1>
+    <h1>Let create a hike!</h1>
+    <div>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/hikes/new/create" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div>
+                <label for="title">Hike name</label>
+                <input type="text" name="title" required>
+            </div>
+            <br>
+            <div>
+                <label for="location">Location</label>
+                <input type="text" name="location" required>
+            </div>
+            <br>
+            <div>
+                <label for="date">Date</label>
+                <input type="date" name="date" required>
+            </div>
+            <br>
+            <div>
+                <label for="time">Time</label>
+                <input type="text" name="time" placeholder="00:00" required>
+                <label for="ampm"></label>
+                <select name="ampm" required>
+                    <option>am</option>
+                    <option>pm</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="meeting">Meeting Place</label>
+                <input type="text" name="meeting" required>
+            </div>
+            <br>
+            <div>
+                <label for="description">Description</label>
+                <!-- <input type="text" name="description" width="500px" height="50px" required> -->
+                <textarea name="description" cols="50" row="10" class="form-control" required></textarea>
+            </div>
+            <br>
+            <div>
+                <label for="difficulty">Difficulty</label>
+                <select name="difficulty" required>
+                    <option>Easy</option>
+                    <option>Moderate</option>
+                    <option>Hard</option>
+                    <option>Seasoned</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="length">Trail length</label>
+                <input type="text" name="length" placeholder="miles" required>
+                <label for="">miles</label>
+            </div>
+            <br>
+            <div>
+                <label for="image">Add an image</label>
+                <input type="file" name="trailpics" required>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+        <br>
+        <a href="/dashboard"><button>Cancel</button></a>
+    </div>
+</body>
+</html>

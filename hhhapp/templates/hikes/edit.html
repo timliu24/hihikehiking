@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Hike</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-image: url('{%static 'img/hike.jpg'%}');">
+    <a href="/logout"><button>Logout</button></a>
+    <h1>Welcome, hiker {{current_user.first_name}}!</h1>
+    <h1>Let edit a hike!</h1>
+    <div>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/hikes/{{one_hike.id}}/update" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="title">Hike name</label>
+            <input type="text" name="title" value="{{one_hike.title}}" required>
+        </div>
+        <br>
+        <div>
+            <label for="location">Location</label>
+            <input type="text" name="location" value="{{one_hike.location}}" required>
+        </div>
+        <br>
+        <!-- <div>
+            <label for="date">Date</label>
+            <input type="date" name="date" value="{{one_hike.date|date:'m-d-Y'}}" required>
+        </div>
+        <br> -->
+        <div>
+            <label for="time">Time</label>
+            <input type="text" name="time" value="{{one_hike.time}}" required>
+            <select name="ampm" value="{{one_hike.ampm}}" required>
+                <option>am</option>
+                <option>pm</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="meeting">Meeting Place</label>
+            <input type="text" name="meeting" value="{{one_hike.meeting}}" required>
+        </div>
+        <br>
+        <div>
+            <label for="description">Description</label>
+            <textarea name="description" cols="50" row="10" value="{{one_hike.description}}" class="form-control" required></textarea>
+        </div>
+        <br>
+        <div>
+            <label for="difficulty">Difficulty</label>
+            <select name="difficulty" value="{{one_hike.difficulty}}" required>
+                <option>Easy</option>
+                <option>Moderate</option>
+                <option>Hard</option>
+                <option>Seasoned</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="length">Trail length</label>
+            <input type="text" name="length" value="{{one_hike.length}}" required>
+            <label for="">miles</label>
+        </div>
+        <br>
+        <!-- <div>
+            <label for="image">Add an image</label>
+            <input type="file" name="trailpics" value="{{one_hike.image}}" required>
+        </div>
+        <br> -->
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <br>
+        <a href="/dashboard"><button>Cancel</button></a>
+    </div>
+</body>
+</html>

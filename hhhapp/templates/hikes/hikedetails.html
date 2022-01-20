@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View hike</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body id="bg" style="background-image: url('{%static 'img/hike.jpg'%}');">
+    <a href="/logout"><button>Logout</button></a>
+    <h1>Welcome, hiker {{current_user.first_name}}!</h1>
+    <a href="/dashboard"><button>Dashboard</button></a>
+    <div>
+        <h2>{{one_hike.title}}</h2>
+        <div>
+            <p>Location: {{one_hike.location}}</p>
+            <p>Date: {{one_hike.date|date:"M d, Y"}}</p>
+            <p>Time: {{one_hike.time}} {{one_hike.ampm}}</p>
+            <p>Meeting place: {{one_hike.meeting}}</p>
+            <p>Description: {{one_hike.description}}</p>
+            <p>Difficulty: {{one_hike.difficulty}}</p>
+            <p>Trail length: {{one_hike.length}} miles</p>
+            <p>Organized by: {{one_hike.creator.first_name}}</p>
+            <p>Posted on: {{one_hike.created_at}}</p>
+            <p><img src="{{one_hike.image}}" alt="" width="400px" ></p>
+        </div>
+        {% if current_user not in one_hike.added_by.all %}
+            <a class="button-form" href="/join/{{one_hike.id}}" role="button">Join</a>
+        {% else %}
+            <a class="button-form" href="/unjoin/{{one_hike.id}}" role="button">Take a Rain Check</a>
+        {% endif %}
+        {% if current_user.id == one_hike.creator.id %}
+            <a class="button-edit" href="/hikes/{{one_hike.id}}/edit">Edit</a>
+            <a class="button-delete" href="/hikes/{{one_hike.id}}/delete">Hike Completed</a>
+        {% endif %}
+    </div>
+</body>
+</html>
