@@ -14,7 +14,7 @@
     <div>
         <h3>Hikes you are joining:</h3>
         <table>
-            <thead>
+            <thead class="table-head">
                 <tr>
                     <th>Hike Name</th>
                     <th>Location</th>
@@ -27,11 +27,11 @@
             <tbody>
                 {% if current_user in one_hike.added_by.all %}
                 <tr>
-                    <td><a href="/hikes/{{one_hike.id}}/hikedetails">{{one_hike.title}}</a></td>
-                    <td>{{one_hike.location}}</td>
-                    <td>{{one_hike.added_by.count}}</td>
-                    <td>{{one_hike.date|date:"M d, Y"}}</td>
-                    <td>{{one_hike.time}} {{one_hike.ampm}}</td>
+                    <td class="hk-name-loc"><a href="/hikes/{{one_hike.id}}/hikedetails">{{one_hike.title}}</a></td>
+                    <td class="hk-name-loc">{{one_hike.location}}</td>
+                    <td class="hk-joined-time">{{one_hike.added_by.count}}</td>
+                    <td class="hk-date">{{one_hike.date|date:"M d, Y"}}</td>
+                    <td class="hk-joined-time">{{one_hike.time}} {{one_hike.ampm}}</td>
                 </tr>
                 {% endif %}
             </tbody>
@@ -42,7 +42,7 @@
 
         <h3>Upcoming hikes:</h3>
             <table>
-                <thead>
+                <thead class="table-head">
                     <tr>
                         <th>Hike Name</th>
                         <th>Location</th>
@@ -55,11 +55,11 @@
                 <tbody>
                     {% if current_user not in one_hike.added_by.all %}
                     <tr>
-                        <td><a href="/hikes/{{one_hike.id}}/hikedetails">{{one_hike.title}}</a></td>
-                        <td>{{one_hike.location}}</td>
-                        <td>{{one_hike.added_by.count}}</td>
-                        <td>{{one_hike.date|date:"M d, Y"}}</td>
-                        <td>{{one_hike.time}} {{one_hike.ampm}}</td>
+                        <td class="hk-name-loc"><a href="/hikes/{{one_hike.id}}/hikedetails">{{one_hike.title}}</a></td>
+                        <td class="hk-name-loc">{{one_hike.location}}</td>
+                        <td class="hk-joined-time">{{one_hike.added_by.count}}</td>
+                        <td class="hk-date">{{one_hike.date|date:"M d, Y"}}</td>
+                        <td class="hk-joined-time">{{one_hike.time}} {{one_hike.ampm}}</td>
                     </tr>
                     {% endif %}
                 </tbody>

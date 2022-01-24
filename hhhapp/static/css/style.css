@@ -1,7 +1,3 @@
-{
-
-}
-
 body{
     margin: 20px;
     padding: 50px;
@@ -23,47 +19,64 @@ body{
 }
 
 .table-head{
-background-color: gray;
-color: white;
-border: 1px solid black;
+    background-color: gray;
+    color: white;
+    border: 1px solid black;
 }
 
+.hk-name-loc{
+    text-decoration: none;
+    width: 200px;
+}
+
+.hk-joined-time{
+    text-align: center;
+    width: 100px;
+}
+
+.hk-date{
+    text-align: center;
+    width: 125px;
+}
+
+
 .button-edit{
-background-image: linear-gradient(yellow, blue);
-padding: 7px 13px;
-color: white;
-font-weight: bold;
-margin: 5px;
-border: none;
-border-radius: 5px;
+    background-image: linear-gradient(yellow, blue);
+    padding: 7px 13px;
+    color: white;
+    font-weight: bold;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
 }
 
 .button-delete{
-background-image: linear-gradient(red, blue);
-padding: 7px 13px;
-color: white;
-font-weight: bold;
-margin: 5px;
-border: none;
-border-radius: 5px;
+    background-image: linear-gradient(red, blue);
+    padding: 7px 13px;
+    color: white;
+    font-weight: bold;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
 }
 
 .button-form{
-background-color: rgb(0, 162, 255);
-padding: 7px 13px;
-color: white;
-font-weight: bold;
-margin: 5px;
-border: none;
-border-radius: 5px;
-}
+    background-color: rgb(0, 162, 255);
+    padding: 7px 13px;
+    color: white;
+    font-weight: bold;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    }
 
 .form-box{
-border: 1px solid black;
-margin: 15px 500px;
-padding: 50px 200px;
+    border: 1px solid black;
+    margin: 15px 500px;
+    padding: 50px 200px;
 }
 
 #bg{
     background-size: cover;
 }
+
