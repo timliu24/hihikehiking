@@ -40,7 +40,8 @@
         <div>
             <label for="time">Time</label>
             <input type="text" name="time" value="{{one_hike.time}}" required>
-            <select name="ampm" value="{{one_hike.ampm}}" required>
+            <select name="ampm" required>
+                <option>{{one_hike.ampm}}</option>
                 <option>am</option>
                 <option>pm</option>
             </select>
@@ -59,8 +60,8 @@
         <br>
         <div>
             <label for="difficulty">Difficulty</label>
-            <select name="difficulty" value="{{one_hike.difficulty}}" required>
-                {{one_hike.difficulty}}
+            <select name="difficulty" required>
+                <option>{{one_hike.difficulty}}</option>
                 <option>Easy</option>
                 <option>Moderate</option>
                 <option>Hard</option>
