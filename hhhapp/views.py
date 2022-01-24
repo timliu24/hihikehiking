@@ -127,7 +127,7 @@ def update(request, hike_id):
         to_update = Hike.objects.get(id=hike_id)
         to_update.title = request.POST['title']
         to_update.location = request.POST['location']
-        # to_update.date = request.POST['date']
+        to_update.date = request.POST['date']
         to_update.time = request.POST['time']
         to_update.ampm = request.POST['ampm']
         to_update.meeting = request.POST['meeting']
