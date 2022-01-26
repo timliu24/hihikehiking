@@ -75,11 +75,12 @@
             <label for="">miles</label>
         </div>
         <br>
-        <!-- <div>
-            <label for="image">Add an image</label>
-            <input type="file" name="trailpics" value="{{one_hike.image}}" required>
+        <div>
+            {% if one_hike.image %}
+            <img src="{{one_hike.image}}" alt="add image here" width="400px">
+            {% endif %}
         </div>
-        <br> -->
+        <br>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
     <br>

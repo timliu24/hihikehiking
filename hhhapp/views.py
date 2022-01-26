@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User, Hike, UserManager
-import bcrypt
+import bcrypt, os
 from django.db.models import Count
 from django.core.files.storage import FileSystemStorage
 
@@ -25,7 +25,7 @@ def register(request):
                 return redirect('/')
             context = {
                 'current_user' : User.objects.get(id=request.session['user_id']),
-                'all_hikes' : Hike.objects.all(),
+                'all_hikes' : Hike.objects.order_by("date", "time"),
             }
             return render(request, 'dashboard.html', context)
     return redirect('/')
@@ -66,7 +66,7 @@ def new(request):
     return render(request, 'hikes/new.html', context)
 
 def create(request):
-    if request.method == "POST" and request.FILES['trailpics']:
+    if request.method == "POST" and request.FILES['trailpics']: 
         errors = Hike.objects.hike_validator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
@@ -114,16 +114,11 @@ def edit(request, hike_id):
     return render(request, 'hikes/edit.html', context)
 
 def update(request, hike_id):
-    # if request.FILES['trailpics']:
         errors = Hike.objects.hike_validator(request.POST)
         if len(errors) > 0:
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect((f'/hikes/{hike_id}/edit'))
-        # trailpics = request.FILES['trailpics']
-        # fs = FileSystemStorage()
-        # filename = fs.save(trailpics.name, trailpics)
-        # url = fs.url(filename)
         to_update = Hike.objects.get(id=hike_id)
         to_update.title = request.POST['title']
         to_update.location = request.POST['location']
@@ -134,7 +129,6 @@ def update(request, hike_id):
         to_update.description = request.POST['description']
         to_update.difficulty = request.POST['difficulty']
         to_update.length = request.POST['length']
-        # to_update.image = url
         to_update.save()
         context = {
             'current_user' : User.objects.get(id=request.session['user_id']),
